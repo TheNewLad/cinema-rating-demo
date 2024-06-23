@@ -1,35 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-// import './App.css'
+import { RatingButtonGroup } from "./components/rating-button-group.tsx";
+import { useRatings } from "./hooks/useRatings.ts";
+import { Rating, Ratings } from "./types.ts";
+
+interface RatingGroup {
+  label: string;
+  id: keyof Ratings;
+}
+const RatingGroups: RatingGroup[] = [
+  {
+    id: "plot",
+    label: "Plot",
+  },
+  {
+    id: "attraction",
+    label: "Attraction",
+  },
+  {
+    id: "theme",
+    label: "Theme",
+  },
+  {
+    id: "acting",
+    label: "Acting",
+  },
+  {
+    id: "dialogue",
+    label: "Dialogue",
+  },
+  {
+    id: "cinematography",
+    label: "Cinematography",
+  },
+  {
+    id: "editing",
+    label: "Editing",
+  },
+  {
+    id: "soundtrack",
+    label: "Soundtrack",
+  },
+  {
+    id: "directing",
+    label: "Directing",
+  },
+  {
+    id: "it_factor",
+    label: "IT Factor",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { ratings, setCategoryRating, score } = useRatings();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+    <main className="grid h-full grid-cols-2 p-4">
+      <section className="flex flex-col items-center justify-evenly">
+        <h1 className="mt-auto text-5xl">Rating</h1>
+        <p className="mb-auto">
+          <span className="text-9xl font-bold">{score.toFixed(1)}</span>
+          <span className="self-center text-3xl font-normal text-gray-500">
+            /{Rating.GREAT}
+          </span>
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      </section>
+      <section className="flex flex-col items-center justify-around">
+        {RatingGroups.map(({ id, label }) => (
+          <RatingButtonGroup
+            key={id}
+            id={id}
+            label={label}
+            rating={ratings[id]}
+            setRating={(rating) => setCategoryRating(id, rating)}
+          />
+        ))}
+      </section>
+    </main>
+  );
 }
 
-export default App
+export default App;
