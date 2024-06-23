@@ -86,4 +86,82 @@ describe("Ratings Calculator", () => {
       expect(calculateUnweightedScore(ratings)).toBe(expectedUnweightedScore);
     });
   });
+
+  describe("calculateWeightedScore", () => {
+    const ratings = {
+      plot: Rating.GREAT,
+      attraction: Rating.BAD,
+      theme: Rating.BAD,
+      acting: Rating.BAD,
+      dialogue: Rating.BAD,
+      cinematography: Rating.BAD,
+      editing: Rating.BAD,
+      soundtrack: Rating.BAD,
+      directing: Rating.BAD,
+      it_factor: Rating.BAD,
+    };
+    const expectedUnweightedScore = 1;
+    it("should calculate the weighted score to be the same as the unweighted score when the weights are all the same", () => {
+      const weights: Required<Ratings> = {
+        plot: 1,
+        attraction: 1,
+        theme: 1,
+        acting: 1,
+        dialogue: 1,
+        cinematography: 1,
+        editing: 1,
+        soundtrack: 1,
+        directing: 1,
+        it_factor: 1,
+      };
+
+      const actualWeightedScore = calculateWeightedScore({ ratings, weights });
+      const actualUnweightedScore = calculateUnweightedScore(ratings);
+
+      expect(actualWeightedScore).toBe(expectedUnweightedScore);
+      expect(actualWeightedScore).toBe(actualUnweightedScore);
+    });
+
+    it("should return 10 when only one weight is 10 and the rest of the weights are 0 regardless of the other category ratings", () => {
+      const weights: Required<Ratings> = {
+        plot: 10,
+        attraction: 0,
+        theme: 0,
+        acting: 0,
+        dialogue: 0,
+        cinematography: 0,
+        editing: 0,
+        soundtrack: 0,
+        directing: 0,
+        it_factor: 0,
+      };
+
+      const expectedUnweightedScore = 10;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedUnweightedScore,
+      );
+    });
+
+    it("should return 0 when only one weight is 0 and the rest of the weights are 10 regardless of the other category ratings", () => {
+      const weights: Required<Ratings> = {
+        plot: 0,
+        attraction: 10,
+        theme: 10,
+        acting: 10,
+        dialogue: 10,
+        cinematography: 10,
+        editing: 10,
+        soundtrack: 10,
+        directing: 10,
+        it_factor: 10,
+      };
+
+      const expectedUnweightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedUnweightedScore,
+      );
+    });
+  });
 });
