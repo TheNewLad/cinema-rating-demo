@@ -23,9 +23,24 @@ export const calculateWeightedScore = ({
   ratings,
   weights,
 }: CalculateWeightedScoreProps) => {
+  const normalizedWeights = getNormalizedWeights(weights);
+
   return (
     Object.keys(ratings).reduce((sum, key) => {
-      return sum + ratings[key] * weights[key];
+      return sum + ratings[key] * normalizedWeights[key];
     }, 0) / Rating.GREAT
   );
+};
+
+const getNormalizedWeights = (weights: Required<Ratings>) => {
+  const total = Object.values(weights).reduce((sum, weight) => {
+    return sum + weight;
+  }, 0);
+
+  return Object.keys(weights).reduce((normalizedWeights, key) => {
+    return {
+      ...normalizedWeights,
+      [key]: weights[key] === 0 ? 0 : weights[key] / (total / Rating.GREAT),
+    };
+  }, {} as Required<Ratings>);
 };

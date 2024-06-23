@@ -6,7 +6,7 @@ import {
 import { Rating, Ratings } from "../src/types";
 
 describe("Ratings Calculator", () => {
-  const ratings = {
+  const ratings: Ratings = {
     plot: Rating.GREAT,
     attraction: Rating.GOOD,
     theme: Rating.BAD,
@@ -26,14 +26,14 @@ describe("Ratings Calculator", () => {
     });
 
     it("should return 0 when no ratings are provided", () => {
-      const ratings = {};
+      const ratings: Ratings = {};
       const expectedUnweightedScore = 0;
 
       expect(calculateUnweightedScore(ratings)).toBe(expectedUnweightedScore);
     });
 
     it("should return 0 when all ratings are BAD(0)", () => {
-      const ratings = {
+      const ratings: Ratings = {
         plot: Rating.BAD,
         attraction: Rating.BAD,
         theme: Rating.BAD,
@@ -51,7 +51,7 @@ describe("Ratings Calculator", () => {
     });
 
     it("should return 10 when all ratings are GREAT(10)", () => {
-      const ratings = {
+      const ratings: Ratings = {
         plot: Rating.GREAT,
         attraction: Rating.GREAT,
         theme: Rating.GREAT,
@@ -69,7 +69,7 @@ describe("Ratings Calculator", () => {
     });
 
     it("should return 5 when all ratings are OK(5)", () => {
-      const ratings = {
+      const ratings: Ratings = {
         plot: Rating.OK,
         attraction: Rating.OK,
         theme: Rating.OK,
@@ -88,7 +88,7 @@ describe("Ratings Calculator", () => {
   });
 
   describe("calculateWeightedScore", () => {
-    const ratings = {
+    const ratings: Ratings = {
       plot: Rating.GREAT,
       attraction: Rating.BAD,
       theme: Rating.BAD,
@@ -161,6 +161,204 @@ describe("Ratings Calculator", () => {
 
       expect(calculateWeightedScore({ ratings, weights })).toBe(
         expectedUnweightedScore,
+      );
+    });
+
+    it("should return 10 when all weights are 10 and all ratings are GREAT(10)", () => {
+      const weights: Required<Ratings> = {
+        plot: 10,
+        attraction: 10,
+        theme: 10,
+        acting: 10,
+        dialogue: 10,
+        cinematography: 10,
+        editing: 10,
+        soundtrack: 10,
+        directing: 10,
+        it_factor: 10,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.GREAT,
+        attraction: Rating.GREAT,
+        theme: Rating.GREAT,
+        acting: Rating.GREAT,
+        dialogue: Rating.GREAT,
+        cinematography: Rating.GREAT,
+        editing: Rating.GREAT,
+        soundtrack: Rating.GREAT,
+        directing: Rating.GREAT,
+        it_factor: Rating.GREAT,
+      };
+      const expectedWeightedScore = 10;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return 0 when all weights are 0 and all ratings are GREAT(10)", () => {
+      const weights: Required<Ratings> = {
+        plot: 0,
+        attraction: 0,
+        theme: 0,
+        acting: 0,
+        dialogue: 0,
+        cinematography: 0,
+        editing: 0,
+        soundtrack: 0,
+        directing: 0,
+        it_factor: 0,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.GREAT,
+        attraction: Rating.GREAT,
+        theme: Rating.GREAT,
+        acting: Rating.GREAT,
+        dialogue: Rating.GREAT,
+        cinematography: Rating.GREAT,
+        editing: Rating.GREAT,
+        soundtrack: Rating.GREAT,
+        directing: Rating.GREAT,
+        it_factor: Rating.GREAT,
+      };
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return 5 when all weights are 10 and all ratings are OK(5)", () => {
+      const weights: Required<Ratings> = {
+        plot: 10,
+        attraction: 10,
+        theme: 10,
+        acting: 10,
+        dialogue: 10,
+        cinematography: 10,
+        editing: 10,
+        soundtrack: 10,
+        directing: 10,
+        it_factor: 10,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.OK,
+        attraction: Rating.OK,
+        theme: Rating.OK,
+        acting: Rating.OK,
+        dialogue: Rating.OK,
+        cinematography: Rating.OK,
+        editing: Rating.OK,
+        soundtrack: Rating.OK,
+        directing: Rating.OK,
+        it_factor: Rating.OK,
+      };
+      const expectedWeightedScore = 5;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return 0 when all weights are 10 and all ratings are BAD(0)", () => {
+      const weights: Required<Ratings> = {
+        plot: 10,
+        attraction: 10,
+        theme: 10,
+        acting: 10,
+        dialogue: 10,
+        cinematography: 10,
+        editing: 10,
+        soundtrack: 10,
+        directing: 10,
+        it_factor: 10,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.BAD,
+        attraction: Rating.BAD,
+        theme: Rating.BAD,
+        acting: Rating.BAD,
+        dialogue: Rating.BAD,
+        cinematography: Rating.BAD,
+        editing: Rating.BAD,
+        soundtrack: Rating.BAD,
+        directing: Rating.BAD,
+        it_factor: Rating.BAD,
+      };
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return 0 when all weights are 0 and all ratings are BAD(0)", () => {
+      const weights: Required<Ratings> = {
+        plot: 0,
+        attraction: 0,
+        theme: 0,
+        acting: 0,
+        dialogue: 0,
+        cinematography: 0,
+        editing: 0,
+        soundtrack: 0,
+        directing: 0,
+        it_factor: 0,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.BAD,
+        attraction: Rating.BAD,
+        theme: Rating.BAD,
+        acting: Rating.BAD,
+        dialogue: Rating.BAD,
+        cinematography: Rating.BAD,
+        editing: Rating.BAD,
+        soundtrack: Rating.BAD,
+        directing: Rating.BAD,
+        it_factor: Rating.BAD,
+      };
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return 0 when all weights are 0 and all ratings are GREAT(10)", () => {
+      const weights: Required<Ratings> = {
+        plot: 0,
+        attraction: 0,
+        theme: 0,
+        acting: 0,
+        dialogue: 0,
+        cinematography: 0,
+        editing: 0,
+        soundtrack: 0,
+        directing: 0,
+        it_factor: 0,
+      };
+
+      const ratings: Ratings = {
+        plot: Rating.GREAT,
+        attraction: Rating.GREAT,
+        theme: Rating.GREAT,
+        acting: Rating.GREAT,
+        dialogue: Rating.GREAT,
+        cinematography: Rating.GREAT,
+        editing: Rating.GREAT,
+        soundtrack: Rating.GREAT,
+        directing: Rating.GREAT,
+        it_factor: Rating.GREAT,
+      };
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
       );
     });
   });
