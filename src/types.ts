@@ -1,14 +1,14 @@
 export interface Ratings {
-  plot: number | null;
-  attraction: number | null;
-  theme: number | null;
-  acting: number | null;
-  dialogue: number | null;
-  cinematography: number | null;
-  editing: number | null;
-  soundtrack: number | null;
-  directing: number | null;
-  it_factor: number | null;
+  plot: number;
+  attraction: number;
+  theme: number;
+  acting: number;
+  dialogue: number;
+  cinematography: number;
+  editing: number;
+  soundtrack: number;
+  directing: number;
+  it_factor: number;
 }
 
 export enum Rating {

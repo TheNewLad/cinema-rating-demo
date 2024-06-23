@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { calculateUnweightedScore } from "../lib/utils.ts";
 import { Rating, Ratings } from "../types.ts";
 
 export const useRatings = () => {
@@ -13,13 +14,7 @@ export const useRatings = () => {
   };
 
   useEffect(() => {
-    const calculateScore = () => {
-      return Object.values(ratings).reduce((acc, rating) => {
-        return acc + (rating ?? 0);
-      }, 0);
-    };
-
-    setScore(calculateScore() / Rating.GREAT);
+    setScore(calculateUnweightedScore(ratings) / Rating.GREAT);
   }, [ratings]);
 
   return { ratings, setCategoryRating, score };
