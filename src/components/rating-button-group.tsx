@@ -9,14 +9,14 @@ import { RatingButton } from "./rating-button.tsx";
 interface RatingButtonGroupProps {
   label: string;
   id: keyof Ratings;
-  rating: number | null;
+  rating?: number;
   setRating: (rating: number) => void;
 }
 
 export const RatingButtonGroup = ({
   label,
   id,
-  rating,
+  rating = -1,
   setRating,
 }: RatingButtonGroupProps) => {
   return (
