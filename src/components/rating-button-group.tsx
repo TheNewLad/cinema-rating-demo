@@ -20,14 +20,14 @@ export const RatingButtonGroup = ({
   setRating,
 }: RatingButtonGroupProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex min-w-80 max-w-80 flex-col">
       <label
         className="text-sm font-medium leading-6 text-gray-900"
         htmlFor={id}
       >
         <h2>{label}</h2>
       </label>
-      <span className="isolate inline-flex max-w-fit rounded-md shadow-sm">
+      <span className="isolate inline-flex max-w-full rounded-md shadow-sm">
         <RatingButton
           className="rounded-l-md"
           onClick={() => setRating(Rating.BAD)}

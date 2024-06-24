@@ -66,17 +66,17 @@ function App() {
   } = useRatings();
 
   return (
-    <main className="grid h-full grid-cols-2 p-4">
-      <section className="flex flex-col items-center justify-start">
-        <h1 className="mb-10 text-5xl">Rating</h1>
-        <div>
+    <main className="grid max-h-fit min-h-full gap-4 p-4 md:grid-cols-2">
+      <section className="mb-10 flex flex-col items-center justify-start gap-2.5 md:mb-0">
+        <h1 className="mb-5 text-5xl">Score</h1>
+        <div className="mb-10 md:mb-0">
           <p className="mb-auto">
             <span className="text-9xl font-bold">{score.toFixed(1)}</span>
             <span className="text-3xl font-normal text-gray-500">
               /{Rating.GREAT}
             </span>
           </p>
-          <Field className="mb-10 flex justify-between">
+          <Field className="mb-4 flex justify-between">
             <Label
               as="span"
               className="text-sm font-medium leading-6 text-gray-900"
@@ -111,31 +111,51 @@ function App() {
             </Switch>
           </Field>
         </div>
-        <Field
+        <div className="mt-auto flex flex-col justify-between">
+          <h3
+            className={classNames(
+              useWeightedScore ? "mb-2 block w-80 text-lg" : "hidden",
+            )}
+          >
+            Weights
+          </h3>
+          <Field
+            className={classNames(
+              useWeightedScore
+                ? "flex min-w-80 max-w-80 flex-col gap-2.5"
+                : "hidden",
+            )}
+          >
+            {RatingGroups.map(({ id, label }) => (
+              <span key={id} className="flex justify-between">
+                <Label
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor={id}
+                >
+                  {label}
+                </Label>
+                <Input
+                  className="block w-1/2 rounded-md border-0 p-1.5 text-right text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  name={id}
+                  type="number"
+                  defaultValue={weights[id]}
+                  onChange={(e) =>
+                    setCategoryWeight(id, e.target.valueAsNumber)
+                  }
+                />
+              </span>
+            ))}
+          </Field>
+        </div>
+      </section>
+      <section className="flex flex-col items-center gap-2.5 pb-2.5 md:h-full md:justify-end md:pb-0">
+        <h3
           className={classNames(
-            useWeightedScore ? "flex flex-col gap-2.5" : "hidden",
+            useWeightedScore ? "block w-80 text-lg" : "hidden",
           )}
         >
-          {RatingGroups.map(({ id, label }) => (
-            <span key={id} className="flex justify-between">
-              <Label
-                className="block text-sm font-medium leading-6 text-gray-900"
-                htmlFor={id}
-              >
-                {label}
-              </Label>
-              <Input
-                className="block w-1/2 rounded-md border-0 p-1.5 text-right text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                name={id}
-                type="number"
-                defaultValue={weights[id]}
-                onChange={(e) => setCategoryWeight(id, e.target.valueAsNumber)}
-              />
-            </span>
-          ))}
-        </Field>
-      </section>
-      <section className="flex flex-col items-center gap-2.5">
+          Category Ratings
+        </h3>
         {RatingGroups.map(({ id, label }) => (
           <RatingButtonGroup
             key={id}
