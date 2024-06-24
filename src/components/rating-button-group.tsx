@@ -21,7 +21,10 @@ export const RatingButtonGroup = ({
 }: RatingButtonGroupProps) => {
   return (
     <div className="flex flex-col">
-      <label htmlFor={id}>
+      <label
+        className="text-sm font-medium leading-6 text-gray-900"
+        htmlFor={id}
+      >
         <h2>{label}</h2>
       </label>
       <span className="isolate inline-flex max-w-fit rounded-md shadow-sm">
