@@ -117,7 +117,7 @@ function App() {
           )}
         >
           {RatingGroups.map(({ id, label }) => (
-            <span className="flex justify-between">
+            <span key={id} className="flex justify-between">
               <Label
                 className="block text-sm font-medium leading-6 text-gray-900"
                 htmlFor={id}
