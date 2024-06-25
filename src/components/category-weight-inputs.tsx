@@ -1,6 +1,4 @@
 import { Field, Input, Label } from "@headlessui/react";
-import { useRatings } from "../hooks/useRatings.ts";
-import { classNames } from "../lib/utils.ts";
 import { RatingGroups, Ratings } from "../types.ts";
 
 interface Props {

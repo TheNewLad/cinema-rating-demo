@@ -1,5 +1,3 @@
-import { useRatings } from "../hooks/useRatings.ts";
-import { classNames } from "../lib/utils.ts";
 import { RatingGroups, Ratings } from "../types.ts";
 import { RatingButtonGroup } from "./rating-button-group.tsx";
 

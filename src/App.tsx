@@ -1,13 +1,8 @@
-import { Field, Input, Label, Switch } from "@headlessui/react";
-import { useState } from "react";
-import { Controller, Path, useForm } from "react-hook-form";
 import { CategoryRatingButtons } from "./components/category-rating-buttons.tsx";
 import { CategoryWeightInputs } from "./components/category-weight-inputs.tsx";
-import { RatingButtonGroup } from "./components/rating-button-group.tsx";
 import { Score } from "./components/score.tsx";
 import { useRatings } from "./hooks/useRatings.ts";
 import { classNames } from "./lib/utils.ts";
-import { Rating, RatingGroups, Ratings } from "./types.ts";
 
 function App() {
   const {

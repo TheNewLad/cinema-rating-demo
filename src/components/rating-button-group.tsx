@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { FormInput, Rating, Ratings } from "../types.ts";
+import { Rating, Ratings } from "../types.ts";
 import { ChevronDoubleUpIcon } from "./icons/chevron-double-up.icon.tsx";
 import { ChevronDownIcon } from "./icons/chevron-down.icon.tsx";
 import { ChevronUpIcon } from "./icons/chevron-up.icon.tsx";

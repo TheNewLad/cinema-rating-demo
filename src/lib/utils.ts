@@ -27,7 +27,11 @@ export const calculateWeightedScore = ({
 
   const score =
     Object.keys(ratings).reduce((sum, key) => {
-      return sum + ratings[key] * normalizedWeights[key];
+      return (
+        sum +
+        (ratings[key as keyof Ratings] ?? 1) *
+          normalizedWeights[key as keyof Ratings]
+      );
     }, 0) / Rating.GREAT;
 
   return isNaN(score) ? 0 : score;
@@ -41,7 +45,10 @@ const getNormalizedWeights = (weights: Required<Ratings>) => {
   return Object.keys(weights).reduce((normalizedWeights, key) => {
     return {
       ...normalizedWeights,
-      [key]: weights[key] === 0 ? 0 : weights[key] / (total / Rating.GREAT),
+      [key]:
+        weights[key as keyof Ratings] === 0
+          ? 0
+          : weights[key as keyof Ratings] / (total / Rating.GREAT),
     };
   }, {} as Required<Ratings>);
 };

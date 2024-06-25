@@ -3,7 +3,7 @@ import {
   calculateUnweightedScore,
   calculateWeightedScore,
 } from "../lib/utils.ts";
-import { Rating, Ratings } from "../types.ts";
+import { Ratings } from "../types.ts";
 
 export const useRatings = () => {
   const [ratings, setRatings] = useState<Partial<Ratings>>({});

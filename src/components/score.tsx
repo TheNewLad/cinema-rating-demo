@@ -5,7 +5,7 @@ import { Rating } from "../types.ts";
 interface Props {
   score: number;
   useWeightedScore: boolean;
-  onChangeUseWeightedScore: (value) => void;
+  onChangeUseWeightedScore: (value: boolean) => void;
 }
 
 export const Score = ({
