@@ -66,11 +66,11 @@ function App() {
   } = useRatings();
 
   return (
-    <main className="flex max-h-fit min-h-full grid-rows-4 flex-col gap-4 p-4 md:grid md:grid-cols-2">
-      <section className="flex max-h-fit justify-center">
+    <main className="flex max-h-fit min-h-full flex-col gap-4 p-4 md:grid md:grid-cols-2 md:grid-rows-[min-content]">
+      <section className="flex max-h-fit justify-center md:col-start-1 md:col-end-2 md:row-start-1">
         <h1 className="mb-5 text-5xl">Score</h1>
       </section>
-      <section className="sticky top-0 z-50 flex justify-center bg-white">
+      <section className="sticky top-0 z-50 flex justify-center bg-white md:relative md:col-start-1 md:col-end-2 md:row-start-2">
         <div className="max-w-64">
           <p>
             <span className="text-9xl font-bold">{score.toFixed(1)}</span>
@@ -148,7 +148,7 @@ function App() {
           ))}
         </Field>
       </section>
-      <section className="flex flex-col items-center gap-2.5 pb-2.5 md:h-full md:justify-end md:pb-0">
+      <section className="md:row-span-auto flex flex-col items-center gap-2.5 pb-2.5 md:col-start-2 md:col-end-3 md:row-span-2 md:row-start-1 md:h-full md:justify-end md:pb-0">
         <h3
           className={classNames(
             useWeightedScore ? "block w-80 text-lg" : "hidden",
