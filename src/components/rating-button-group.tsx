@@ -8,6 +8,7 @@ import { RatingButton } from "./rating-button.tsx";
 
 interface RatingButtonGroupProps {
   label: string;
+  description: string;
   id: keyof Ratings;
   rating?: number;
   setRating: (rating: number) => void;
@@ -15,14 +16,21 @@ interface RatingButtonGroupProps {
 
 export const RatingButtonGroup = ({
   label,
+  description,
   id,
   rating = -1,
   setRating,
 }: RatingButtonGroupProps) => {
   return (
     <div className="flex min-w-80 max-w-80 flex-col">
-      <label className="text-sm font-medium leading-6" htmlFor={id}>
+      <label
+        className="inline-flex gap-2 text-sm font-medium leading-6"
+        htmlFor={id}
+      >
         <h2>{label}</h2>
+        <p className="content-center text-xs text-slate-500 dark:text-slate-300">
+          {description}
+        </p>
       </label>
       <span className="isolate inline-flex max-w-full rounded-md shadow-sm">
         <RatingButton

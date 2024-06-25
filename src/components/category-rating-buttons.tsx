@@ -15,11 +15,12 @@ export const CategoryRatingButtons = ({
   return (
     <>
       <h2 className="block w-80 text-lg">Category Ratings</h2>
-      {RatingGroups.map(({ id, label }) => (
+      {RatingGroups.map(({ id, label, description }) => (
         <RatingButtonGroup
           key={id}
           id={id}
           label={label}
+          description={description}
           rating={ratings[id]}
           setRating={(rating) => setCategoryRating(id, rating)}
         />
