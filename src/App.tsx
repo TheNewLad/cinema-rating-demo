@@ -27,7 +27,7 @@ function App() {
         <section className="flex max-h-fit justify-center md:col-start-1 md:col-end-2 md:row-start-1">
           <h1 className="mb-5 text-5xl">Score</h1>
         </section>
-        <section className="sticky top-0 z-50 flex justify-center bg-white md:relative md:col-start-1 md:col-end-2 md:row-start-2">
+        <section className="sticky top-0 z-50 flex justify-center bg-white md:relative md:col-start-1 md:col-end-2 md:row-start-2 dark:bg-slate-700">
           <Score
             score={score}
             useWeightedScore={useWeightedScore}
@@ -57,7 +57,7 @@ function App() {
       <main className="hidden max-h-fit min-h-full flex-col gap-4 p-4 md:grid md:grid-cols-2">
         <section className="col-end-2 row-start-1 flex max-h-fit flex-col md:col-start-1">
           <h1 className="mb-5 flex justify-center text-5xl">Score</h1>
-          <div className="flex justify-center bg-white">
+          <div className="flex justify-center">
             <Score
               score={score}
               useWeightedScore={useWeightedScore}
@@ -76,7 +76,7 @@ function App() {
             />
           </div>
         </section>
-        <section className="flex flex-col items-center gap-2.5 pb-2.5">
+        <section className="flex flex-col items-center gap-2.5">
           <CategoryRatingButtons
             setCategoryRating={setCategoryRating}
             ratings={ratings}

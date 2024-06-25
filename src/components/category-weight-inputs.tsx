@@ -15,10 +15,7 @@ export const CategoryWeightInputs = ({ weights, setCategoryWeight }: Props) => {
       <Field className="flex min-w-80 max-w-80 flex-col gap-2.5">
         {RatingGroups.map(({ id, label }) => (
           <span key={id} className="flex justify-between">
-            <Label
-              className="block text-sm font-medium leading-6 text-gray-900"
-              htmlFor={id}
-            >
+            <Label className="block text-sm font-medium leading-6" htmlFor={id}>
               {label}
             </Label>
             <Input
