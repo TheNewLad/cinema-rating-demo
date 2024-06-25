@@ -11,7 +11,7 @@ interface Props {
 export const CategoryWeightInputs = ({ weights, setCategoryWeight }: Props) => {
   return (
     <>
-      <h3 className="mb-2 block w-80 text-lg">Weights</h3>
+      <h2 className="mb-2 block w-80 text-lg">Weights</h2>
       <Field className="flex min-w-80 max-w-80 flex-col gap-2.5">
         {RatingGroups.map(({ id, label }) => (
           <span key={id} className="flex justify-between">

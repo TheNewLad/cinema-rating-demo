@@ -14,7 +14,7 @@ export const CategoryRatingButtons = ({
 }: Props) => {
   return (
     <>
-      <h3 className="block w-80 text-lg">Category Ratings</h3>
+      <h2 className="block w-80 text-lg">Category Ratings</h2>
       {RatingGroups.map(({ id, label }) => (
         <RatingButtonGroup
           key={id}
