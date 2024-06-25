@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   calculateUnweightedScore,
   calculateWeightedScore,
@@ -82,6 +82,15 @@ describe("Ratings Calculator", () => {
         it_factor: Rating.OK,
       };
       const expectedUnweightedScore = 5;
+
+      expect(calculateUnweightedScore(ratings)).toBe(expectedUnweightedScore);
+    });
+
+    it("should return partial score when only some ratings are provided", () => {
+      const ratings: Partial<Ratings> = {
+        plot: Rating.GREAT,
+      };
+      const expectedUnweightedScore = 1.0;
 
       expect(calculateUnweightedScore(ratings)).toBe(expectedUnweightedScore);
     });
@@ -355,6 +364,99 @@ describe("Ratings Calculator", () => {
         directing: Rating.GREAT,
         it_factor: Rating.GREAT,
       };
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return partial score when only some ratings are provided", () => {
+      const lowWeights: Required<Ratings> = {
+        plot: 0,
+        attraction: 0,
+        theme: 0,
+        acting: 0,
+        dialogue: 0,
+        cinematography: 0,
+        editing: 0,
+        soundtrack: 0,
+        directing: 0,
+        it_factor: 0,
+      };
+
+      const highWeights: Required<Ratings> = {
+        plot: 10,
+        attraction: 10,
+        theme: 10,
+        acting: 10,
+        dialogue: 10,
+        cinematography: 10,
+        editing: 10,
+        soundtrack: 10,
+        directing: 10,
+        it_factor: 10,
+      };
+
+      const ratings: Partial<Ratings> = {
+        plot: Rating.GREAT,
+      };
+
+      const expectedLowWeightedScore = 0.0;
+      const expectedHighWeightedScore = 1.0;
+
+      expect(calculateWeightedScore({ ratings, weights: lowWeights })).toBe(
+        expectedLowWeightedScore,
+      );
+
+      expect(calculateWeightedScore({ ratings, weights: highWeights })).toBe(
+        expectedHighWeightedScore,
+      );
+    });
+
+    it("should return score when some weights are NaN", () => {
+      const weights: Required<Ratings> = {
+        plot: NaN,
+        attraction: 1,
+        theme: 1,
+        acting: 1,
+        dialogue: 1,
+        cinematography: 1,
+        editing: 1,
+        soundtrack: 1,
+        directing: 1,
+        it_factor: 1,
+      };
+
+      const ratings: Partial<Ratings> = {
+        plot: Rating.GREAT,
+      };
+
+      const expectedWeightedScore = 0;
+
+      expect(calculateWeightedScore({ ratings, weights })).toBe(
+        expectedWeightedScore,
+      );
+    });
+
+    it("should return score when some ratings are undefined", () => {
+      const weights: Required<Ratings> = {
+        plot: 1,
+        attraction: 1,
+        theme: 1,
+        acting: 1,
+        dialogue: 1,
+        cinematography: 1,
+        editing: 1,
+        soundtrack: 1,
+        directing: 1,
+        it_factor: 1,
+      };
+
+      const ratings: Partial<Ratings> = {
+        plot: undefined,
+      };
+
       const expectedWeightedScore = 0;
 
       expect(calculateWeightedScore({ ratings, weights })).toBe(

@@ -29,7 +29,7 @@ export const calculateWeightedScore = ({
     Object.keys(ratings).reduce((sum, key) => {
       return (
         sum +
-        (ratings[key as keyof Ratings] ?? 1) *
+        (ratings[key as keyof Ratings] ?? 0) *
           normalizedWeights[key as keyof Ratings]
       );
     }, 0) / Rating.GREAT;
