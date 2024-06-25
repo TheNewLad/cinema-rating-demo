@@ -17,7 +17,7 @@ export const Score = ({
     <div className="max-w-64">
       <p>
         <span className="text-9xl font-bold">{score.toFixed(1)}</span>
-        <span className="text-3xl font-normal text-gray-500">
+        <span className="text-3xl font-normal text-slate-500">
           /{Rating.GREAT}
         </span>
       </p>
@@ -32,7 +32,7 @@ export const Score = ({
         <Switch
           checked={useWeightedScore}
           onChange={onChangeUseWeightedScore}
-          className="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+          className="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
         >
           <span className="sr-only">Use setting</span>
           <span
@@ -42,7 +42,7 @@ export const Score = ({
           <span
             aria-hidden="true"
             className={classNames(
-              useWeightedScore ? "bg-indigo-600" : "bg-gray-200",
+              useWeightedScore ? "bg-slate-600" : "bg-gray-200",
               "pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out",
             )}
           />
